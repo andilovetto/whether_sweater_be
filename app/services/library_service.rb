@@ -4,7 +4,6 @@ class LibraryService
       f.params["place"] = location
       f.params["limit"] = quantity
     end
-    require 'pry'; binding.pry
     JSON.parse(response.body, symbolize_names: true)
   end
   

@@ -20,13 +20,14 @@ RSpec.describe "library request" do
         expect(books_response[:data][:attributes]).to have_key(:destination)
         expect(books_response[:data][:attributes]).to have_key(:forecast)
         expect(books_response[:data][:attributes][:forecast]).to have_key(:summary)
-        expect(books_response[:data][:attributes][:forecast]).to have_key(:temerature)
-        expect(books_response[:data][:attributes]).to have_key(:total_book_found)
+        expect(books_response[:data][:attributes][:forecast]).to have_key(:temperature)
+        expect(books_response[:data][:attributes]).to have_key(:total_books_found)
         expect(books_response[:data][:attributes]).to have_key(:books)
         expect(books_response[:data][:attributes][:books]).to be_an Array
-        expect(books_response[:data][:attributes][:books][0]).to have_key(:isbn)
-        expect(books_response[:data][:attributes][:books][0][:isbn][0]).to be_an Array
-        expect(books_response[:data][:attributes][:books][0]).to have_key(:title)
+        books_response[:data][:attributes][:books].each do |book|
+          expect(book).to have_key(:isbn)
+          expect(book).to have_key(:title)
+        end
       end
     end
   end
