@@ -71,6 +71,7 @@ RSpec.describe "user request" do
 
     context "when email is already taken" do
       it "returns status 400" do
+        User.create!(email: "taken@gmail.com", password: 'password', password_confirmation: 'password')
         headers = { 'CONTENT_TYPE' => 'application/json', "Accept" => 'application/json' }
         params = {
           "email": "taken@gmail.com",
@@ -81,7 +82,6 @@ RSpec.describe "user request" do
     
         post '/api/v0/users', headers: headers, params: body
 
-        post '/api/v0/users', headers: headers, params: body
     
         error_response = JSON.parse(response.body, symbolize_names: true)
         
